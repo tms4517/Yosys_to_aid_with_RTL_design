@@ -1,1 +1,2 @@
-# Yosys_to_aid_with_RTL_design
+# A compilation of the different ways Yosys can be used to aid with RTL design
+
