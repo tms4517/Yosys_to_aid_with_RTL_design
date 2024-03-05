@@ -27,7 +27,7 @@ module fsm
     else
       state_q <= 3'h5;
 
-  always_comb
+  always_comb begin
     case (state_q)
       STATE_IDLE:
         if (i_stateTransition1)
@@ -52,6 +52,7 @@ module fsm
       default:
           state_d = STATE_IDLE;
     endcase
+  end
 
   always_comb
     if (state_q == STATE_GRANT)
