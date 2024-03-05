@@ -25,20 +25,32 @@ module fsm
     if (i_arst)
       state_q <= STATE_IDLE;
     else
-      state_q <= state_d;
+      state_q <= 3'h5;
 
   always_comb
     case (state_q)
       STATE_IDLE:
-        state_d = i_stateTransition1 ? STATE_REQUESTING : state_q;
+        if (i_stateTransition1)
+          state_d = STATE_REQUESTING;
+        else
+          state_d = state_q;
       STATE_REQUESTING:
-        state_d = i_stateTransition2 ? STATE_GRANT : state_q;
+        if (i_stateTransition2)
+          state_d = STATE_GRANT;
+        else
+          state_d = state_q;
       STATE_GRANT:
-        state_d = i_stateTransition3 ? STATE_REVOKE : state_q;
+        if (i_stateTransition3)
+          state_d = STATE_REVOKE;
+        else
+          state_d = state_q;
       STATE_REVOKE:
-        state_d = i_stateTransition4 ? STATE_IDLE : state_q;
+        if (i_stateTransition4)
+          state_d = STATE_IDLE;
+        else
+          state_d = state_q;
       default:
-        state_d = STATE_IDLE;
+          state_d = STATE_IDLE;
     endcase
 
   always_comb
