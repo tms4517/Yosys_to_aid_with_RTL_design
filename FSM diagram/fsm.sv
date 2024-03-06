@@ -33,22 +33,22 @@ module fsm
         if (i_stateTransition1)
           state_d = STATE_REQUESTING;
         else
-          state_d = state_q;
+          state_d = STATE_IDLE;
       STATE_REQUESTING:
         if (i_stateTransition2)
           state_d = STATE_GRANT;
         else
-          state_d = state_q;
+          state_d = STATE_REQUESTING;
       STATE_GRANT:
         if (i_stateTransition3)
           state_d = STATE_REVOKE;
         else
-          state_d = state_q;
+          state_d = STATE_GRANT;
       STATE_REVOKE:
         if (i_stateTransition4)
           state_d = STATE_IDLE;
         else
-          state_d = state_q;
+          state_d = STATE_REVOKE;
       default:
           state_d = STATE_IDLE;
     endcase
