@@ -19,40 +19,28 @@ module fsm
     , STATE_REVOKE
     } ty_STATE_FSM;
 
-  ty_STATE_FSM state_q, state_d;
+  // Required for Yosys to idnetify FSM state registers.
+  (* fsm_encoding="auto" *) ty_STATE_FSM state_q, state_d;
 
-   always_ff @(posedge i_ck, posedge i_arst)
+  always_ff @(posedge i_ck, posedge i_arst)
     if (i_arst)
       state_q <= STATE_IDLE;
     else
       state_q <= state_d;
 
-  always_comb begin
+  always_comb
     case (state_q)
       STATE_IDLE:
-        if (i_stateTransition1)
-          state_d = STATE_REQUESTING;
-        else
-          state_d = STATE_IDLE;
+        state_d = i_stateTransition1 ? STATE_REQUESTING : STATE_IDLE;
       STATE_REQUESTING:
-        if (i_stateTransition2)
-          state_d = STATE_GRANT;
-        else
-          state_d = STATE_REQUESTING;
+        state_d = i_stateTransition2 ? STATE_GRANT : STATE_REQUESTING;
       STATE_GRANT:
-        if (i_stateTransition3)
-          state_d = STATE_REVOKE;
-        else
-          state_d = STATE_GRANT;
+        state_d = i_stateTransition3 ? STATE_REVOKE : STATE_GRANT;
       STATE_REVOKE:
-        if (i_stateTransition4)
-          state_d = STATE_IDLE;
-        else
-          state_d = STATE_REVOKE;
+        state_d = i_stateTransition4 ? STATE_IDLE : STATE_REVOKE;
       default:
-          state_d = STATE_IDLE;
+        state_d = STATE_IDLE;
     endcase
-  end
 
   always_comb
     if (state_q == STATE_GRANT)
