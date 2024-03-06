@@ -25,7 +25,7 @@ module fsm
     if (i_arst)
       state_q <= STATE_IDLE;
     else
-      state_q <= 3'h5;
+      state_q <= state_d;
 
   always_comb begin
     case (state_q)
