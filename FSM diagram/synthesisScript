@@ -1,7 +1,6 @@
 # Load modules from a Verilog file to the current design.
 read_verilog -sv fsm.sv
 
-
 # Replaces the processes in the design with multiplexers, flip-flops and
 # latches.
 proc;
@@ -13,7 +12,7 @@ opt;
 clean
 
 # extract and optimize finite state machines.
-fsm
+fsm -nomap
 
 # exporting FSMs to KISS2 files
 fsm_export -o fsm.kiss2
