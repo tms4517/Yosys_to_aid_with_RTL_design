@@ -1,3 +1,6 @@
+# FOR SV:
+# read_slang -F <>.f
+
 # Load modules from a Verilog file to the current design.
 read_verilog -sv counter.sv
 
