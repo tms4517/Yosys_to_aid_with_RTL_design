@@ -2,9 +2,15 @@
 
 `yosys -s synthesisScript`
 
+For SV features:
+`yosys -m slang -s synthesisScript`
+
 ![script](circuit.svg)
 
 `yosys -s synthesisScript2`
+
+For SV features:
+`yosys -m slang -s synthesisScript`
 
 ![script2](circuit2.svg)
 
